@@ -1,0 +1,522 @@
+
+*DO,GLOBAL_INDEX,1,5
+global_index = 1 
+
+!массив значений толщины балок 
+*DIM,h_list,ARRAY,5
+h_list(1) = 0.05
+h_list(2) = 0.1
+h_list(3) = 0.15
+h_list(4) = 0.2
+h_list(5) = 0.25
+h_list(6) = 0.3
+h_list(7) = 0.32
+
+
+
+
+/prep7 
+
+!f_r = 'cube_result'    ! Название файла, куда записываютс¤ результаты 
+ 
+lf = 1 
+lc = lf/2 
+ 
+
+h = h_list(global_index) 
+hh = h/2 
+ 
+l = (1-3*h)/2 
+a = h/sqrt(2) 
+ 
+! передние ребра 
+ 
+ 
+! нижняя 
+block, -lc, -lc+h, -lc, -lc+h, lc-h, lc 
+block, -lc+h, -lc+h+a, -lc, -lc+h, lc-h, lc    
+block, -lc+h+a, -hh, -lc, -lc+h, lc-h, lc    
+block, -hh, hh, -lc, -lc+h, lc-h, lc    
+block, hh, lc-h, -lc, -lc+h, lc-h, lc    
+block, lc-h, lc, -lc, -lc+h, lc-h, lc  
+ 
+! правая 
+block, lc-h, lc, -lc+h, -hh, lc-h, lc 
+block, lc-h, lc, -hh, hh, lc-h, lc  
+block, lc-h, lc, hh, lc-h-a, lc-h, lc  
+block, lc-h, lc, lc-h-a, lc-h, lc-h, lc  
+block, lc-h, lc, lc-h, lc, lc-h, lc 				
+ 
+! верхняя 
+block, -lc, -lc+h, lc, lc-h, lc-h, lc 			
+block, -lc+h, -hh, lc, lc-h, lc-h, lc 
+block, -hh, hh, lc, lc-h, lc-h, lc
+block, hh, lc-h-a, lc, lc-h, lc-h, lc  
+block, lc-h-a, lc-h, lc, lc-h, lc-h, lc  
+ 
+! левая 
+block, -lc, -lc+h, -lc+h, -lc+h+a, lc-h, lc  
+block, -lc, -lc+h, -lc+h+a, -hh, lc-h, lc  
+block, -lc, -lc+h, -hh, hh, lc-h, lc  
+block, -lc, -lc+h, hh, lc-h, lc-h, lc  
+ 
+ 
+ 
+ 
+ 
+! задние ребра 
+ 
+ 
+! нижняя   
+block, -lc, -lc+h, -lc, -lc+h, -lc+h, -lc   
+block, -lc+h, -lc+h+a, -lc, -lc+h, -lc+h, -lc     
+block, -lc+h+a, -hh, -lc, -lc+h, -lc+h, -lc     
+block, -hh, hh, -lc, -lc+h, -lc+h, -lc     
+block, hh, lc-h, -lc, -lc+h, -lc+h, -lc    
+block, lc-h, lc, -lc, -lc+h, -lc+h, -lc  
+  
+!правая 
+block, lc-h, lc, -lc+h, -lc+h+a, -lc+h, -lc
+block, lc-h, lc, -lc+h+a, -hh, -lc+h, -lc  
+block, lc-h, lc, -hh, hh, -lc+h, -lc   
+block, lc-h, lc, hh, lc-h-a, -lc+h, -lc   
+block, lc-h, lc, lc-h-a, lc-h, -lc+h, -lc   
+block, lc-h, lc, lc-h, lc, -lc+h, -lc  
+ 
+!верхняя  
+block, -lc, -lc+h, lc, lc-h, -lc+h, -lc  
+block, -lc+h, -lc+h+a, lc, lc-h, -lc+h, -lc  
+block, -lc+h+a, -hh, lc, lc-h, -lc+h, -lc  
+block, -hh, hh, lc, lc-h, -lc+h, -lc  
+block, hh, lc-h-a, lc, lc-h, -lc+h, -lc  
+block, lc-h-a, lc-h, lc, lc-h, -lc+h, -lc  
+  
+!левая
+block, -lc, -lc+h, -lc+h, -lc+h+a, -lc+h, -lc   
+block, -lc, -lc+h, -lc+h+a, -hh, -lc+h, -lc  
+block, -lc, -lc+h, -hh, hh, -lc+h, -lc  
+block, -lc, -lc+h, hh, lc-h,  -lc+h, -lc  
+
+ 
+ 
+! ребра справа 
+ 
+ 
+!нижнее 
+block, lc-h, lc, -lc+h, -lc, lc-h, lc-h-a 
+block, lc-h, lc, -lc+h, -lc, lc-h-a, hh   
+block, lc-h, lc, -lc+h, -lc, hh, -hh, 
+block, lc-h, lc, -lc+h, -lc, -hh, -lc+h+a 
+block, lc-h, lc, -lc+h, -lc, -lc+h+a, -lc+h 
+ 
+!верхнее 
+block, lc-h, lc, lc-h, lc, lc-h, lc-h-a 
+block, lc-h, lc, lc-h, lc, lc-h, hh   
+block, lc-h, lc, lc-h, lc, hh, -hh,  
+block, lc-h, lc, lc-h, lc, -hh, -lc+h+a 
+block, lc-h, lc, lc-h, lc, -hh, -lc+h 
+ 
+ 
+! ребра слева 
+ 
+ 
+!нижнее  
+block, -lc+h, -lc, -lc+h, -lc, lc-h, hh    
+block, -lc+h, -lc, -lc+h, -lc, hh, -hh,  
+block, -lc+h, -lc, -lc+h, -lc, -hh, -lc+h+a 
+block, -lc+h, -lc, -lc+h, -lc, -hh, -lc+h  
+  
+!верхнее  
+block, -lc+h, -lc, lc-h, lc, lc-h, lc-h-a 
+block, -lc+h, -lc, lc-h, lc, lc-h, hh    
+block, -lc+h, -lc, lc-h, lc, hh, -hh,   
+block, -lc+h, -lc, lc-h, lc, -hh, -lc+h+a 
+block, -lc+h, -lc, lc-h, lc, -hh, -lc+h
+
+! Диагональные блоки
+
+! Передняя грань 
+ 
+k,1001,-lc+h,-lc+h+a,lc 
+k,1002,-lc+h+a,-lc+h,lc 
+k,1003,lc-h,lc-h-a,lc 
+k,1004,lc-h-a,lc-h,lc 
+k,1005,-lc+h,-lc+h+a,lc-h 
+k,1006,-lc+h+a,-lc+h,lc-h 
+k,1007,lc-h,lc-h-a,lc-h 
+k,1008,lc-h-a,lc-h,lc-h 
+ 
+! Задняя грань 
+
+k,1009,-lc+h,-lc+h+a,-lc 
+k,1010,-lc+h+a,-lc+h,-lc 
+k,1011,lc-h,lc-h-a,-lc 
+k,1012,lc-h-a,lc-h,-lc 
+k,1013,-lc+h,-lc+h+a,-lc+h 
+k,1014,-lc+h+a,-lc+h,-lc+h 
+k,1015,lc-h,lc-h-a,-lc+h 
+k,1016,lc-h-a,lc-h,-lc+h 
+ 
+! Правая грань
+
+k,1017,lc,-lc+h+a,-lc+h
+k,1018,lc,-lc+h,-lc+h+a
+k,1019,lc,lc-h-a,lc-h
+k,1020,lc,lc-h,lc-h-a
+k,1021,lc-h,-lc+h+a,-lc+h
+k,1022,lc-h,-lc+h,-lc+h+a
+k,1023,lc-h,lc-h-a,lc-h
+k,1024,lc-h,lc-h,lc-h-a
+
+! Левая грань
+
+k,1025,-lc,-lc+h+a,-lc+h 
+k,1026,-lc,-lc+h,-lc+h+a
+k,1027,-lc,lc-h-a,lc-h
+k,1028,-lc,lc-h,lc-h-a
+k,1029,-lc+h,-lc+h+a,-lc+h
+k,1030,-lc+h,-lc+h,-lc+h+a
+k,1031,-lc+h,lc-h-a,lc-h
+k,1032,-lc+h,lc-h,lc-h-a
+
+! Грань сверху
+
+k,1033,-lc+h,lc,-lc+h+a
+k,1034,-lc+h+a,lc,-lc+h 
+k,1035,lc-h,lc,lc-h-a
+k,1036,lc-h-a,lc,lc-h
+k,1037,-lc+h,lc-h,-lc+h+a
+k,1038,-lc+h+a,lc-h,-lc+h
+k,1039,lc-h,lc-h,lc-h-a
+k,1040,lc-h-a,lc-h,lc-h
+
+! Грань снизу
+
+k,1041,-lc+h,-lc,-lc+h+a
+k,1042,-lc+h+a,-lc,-lc+h 
+k,1043,lc-h,-lc,lc-h-a
+k,1044,lc-h-a,-lc,lc-h
+k,1045,-lc+h,-lc+h,-lc+h+a
+k,1046,-lc+h+a,-lc+h,-lc+h
+k,1047,lc-h,-lc+h,lc-h-a
+k,1048,lc-h-a,-lc+h,lc-h
+
+!параллелипипеды 
+v,1001,1002,1003,1004,1005,1006,1007,1008 
+v,1009,1010,1011,1012,1013,1014,1015,1016 
+v,1017,1018,1019,1020,1021,1022,1023,1024 
+v,1025,1026,1027,1028,1029,1030,1031,1032
+v,1033,1034,1035,1036,1037,1038,1039,1040  
+v,1041,1042,1043,1044,1045,1046,1047,1048  
+
+
+
+! Треугольники
+
+! Передний снизу-слева
+
+!2 (дальняя справа)
+k,1049,-lc+h,-lc+h+a,lc-h  
+!1 (дальняя по центру)
+k,1050,-lc+h,-lc+h,lc-h   
+!5 (дальняя по слева)
+k,1051,-lc+h+a,-lc+h,lc-h   
+!4 (ближняя справа)
+k,1052,-lc+h,-lc+h+a,lc
+!3 (ближнаяя по центру)
+k,1053,-lc+h,-lc+h,lc
+!6 (ближняя по слева)
+k,1054,-lc+h+a,-lc+h,lc   
+
+! Передний сверху-справа
+
+!1 (дальняя по центру)
+k,1055,lc-h,lc-h,lc-h   
+!2 (дальняя справа)
+k,1056,lc-h,lc-h-a,lc-h   
+!5 (дальняя по слева)
+k,1057,lc-h-a,lc-h,lc-h  
+!3 (ближнаяя по центру)
+k,1058,lc-h,lc-h,lc   
+!4 (ближняя справа)
+k,1059,lc-h,lc-h-a,lc
+!6 (ближняя по слева)
+k,1060,lc-h-a,lc-h,lc  
+ 
+
+v,1049,1050,1051,1052,1053,1054 
+v,1055,1056,1057,1058,1059,1060 
+
+
+! Задняя грань
+
+!1 (дальняя по центру)
+k,1061,-lc+h,-lc+h,-lc+h   
+!2 (дальняя справа)
+k,1062,-lc+h,-lc+h+a,-lc+h   
+!5 (дальняя по слева)
+k,1063,-lc+h+a,-lc+h,-lc+h      
+!3 (ближнаяя по центру)
+k,1064,-lc+h,-lc+h,-lc      
+!4 (ближняя справа)
+k,1065,-lc+h,-lc+h+a,-lc
+!6 (ближняя по слева)
+k,1066,-lc+h+a,-lc+h,-lc  
+
+! Задний сверху-справа
+
+!1 (дальняя по центру)
+k,1067,lc-h,lc-h,-lc+h   
+!2 (дальняя справа)
+k,1068,lc-h,lc-h-a,-lc+h   
+!5 (дальняя по слева)
+k,1069,lc-h-a,lc-h,-lc+h       
+!3 (ближнаяя по центру)
+k,1070,lc-h,lc-h,-lc      
+!4 (ближняя справа)
+k,1071,lc-h,lc-h-a,-lc
+!6 (ближняя по слева)
+k,1072,lc-h-a,lc-h,-lc  
+
+
+v,1061,1062,1063,1064,1065,1066 
+v,1067,1068,1069,1070,1071,1072 
+
+
+
+
+! Грани справа и слева
+
+! Треугольники
+
+! сверху-слева
+
+!2 (дальняя справа)
+k,1073,lc-h,lc-h,lc-h-a  
+!1 (дальняя по центру)
+k,1074,lc-h,lc-h,lc-h   
+!5 (дальняя по слева)
+k,1075,lc-h,lc-h-a,lc-h   
+!4 (ближняя справа)
+k,1076,lc,lc-h,lc-h-a
+!3 (ближнаяя по центру)
+k,1077,lc,lc-h,lc-h
+!6 (ближняя по слева)
+k,1078,lc,lc-h-a,lc-h   
+
+! снизу-справа
+
+!1 (дальняя по центру)
+k,1079,lc-h,-lc+h,-lc+h  
+!2 (дальняя справа)
+k,1080,lc-h,-lc+h+a,-lc+h   
+!5 (дальняя по слева)
+k,1081,lc-h,-lc+h,-lc+h+a  
+!3 (ближнаяя по центру)
+k,1082,lc,-lc+h,-lc+h   
+!4 (ближняя справа)
+k,1083,lc,-lc+h+a,-lc+h
+!6 (ближняя по слева)
+k,1084,lc,-lc+h,-lc+h+a
+ 
+
+v,1073,1074,1075,1076,1077,1078 
+v,1079,1080,1081,1082,1083,1084 
+
+
+
+
+
+
+! Грани справа и слева
+
+! Треугольники
+
+! сверху-слева
+
+!2 (дальняя справа)
+k,1085,-lc+h,lc-h,lc-h-a  
+!1 (дальняя по центру)
+k,1086,-lc+h,lc-h,lc-h   
+!5 (дальняя по слева)
+k,1087,-lc+h,lc-h-a,lc-h   
+!4 (ближняя справа)
+k,1088,-lc,lc-h,lc-h-a
+!3 (ближнаяя по центру)
+k,1089,-lc,lc-h,lc-h
+!6 (ближняя по слева)
+k,1090,-lc,lc-h-a,lc-h   
+
+! снизу-справа
+
+!1 (дальняя по центру)
+k,1091,-lc+h,-lc+h,-lc+h  
+!2 (дальняя справа)
+k,1092,-lc+h,-lc+h+a,-lc+h   
+!5 (дальняя по слева)
+k,1093,-lc+h,-lc+h,-lc+h+a  
+!3 (ближнаяя по центру)
+k,1094,-lc,-lc+h,-lc+h   
+!4 (ближняя справа)
+k,1095,-lc,-lc+h+a,-lc+h
+!6 (ближняя по слева)
+k,1096,-lc,-lc+h,-lc+h+a
+ 
+
+v,1085,1086,1087,1088,1089,1090 
+v,1091,1092,1093,1094,1095,1096 
+
+
+! Треугольники
+
+! сверху-слева
+
+!2 (дальняя справа)
+k,1097,-lc+h+a,lc-h,-lc+h  
+!1 (дальняя по центру)
+k,1098,-lc+h,lc-h,-lc+h   
+!5 (дальняя по слева)
+k,1099,-lc+h,lc-h,-lc+h+a   
+!4 (ближняя справа)
+k,1100,-lc+h+a,lc,-lc+h
+!3 (ближнаяя по центру)
+k,1101,-lc+h,lc,-lc+h
+!6 (ближняя по слева)
+k,1102,-lc+h,lc,-lc+h+a  
+
+! снизу-справа
+
+!1 (дальняя по центру)
+k,1103,lc-h,lc-h,lc-h  
+!2 (дальняя справа)
+k,1104,lc-h,lc-h,lc-h-a   
+!5 (дальняя по слева)
+k,1105,lc-h-a,lc-h,lc-h  
+!3 (ближнаяя по центру)
+k,1106,lc-h,lc,lc-h  
+!4 (ближняя справа)
+k,1107,lc-h,lc,lc-h-a
+!6 (ближняя по слева)
+k,1108,lc-h-a,lc,lc-h
+ 
+
+v,1097,1098,1099,1100,1101,1102 
+v,1103,1104,1105,1106,1107,1108 
+
+
+! Треугольники
+
+! сверху-слева
+
+!2 (дальняя справа)
+k,1109,-lc+h+a,-lc+h,-lc+h  
+!1 (дальняя по центру)
+k,1110,-lc+h,-lc+h,-lc+h   
+!5 (дальняя по слева)
+k,1111,-lc+h,-lc+h,-lc+h+a   
+!4 (ближняя справа)
+k,1112,-lc+h+a,-lc,-lc+h
+!3 (ближнаяя по центру)
+k,1113,-lc+h,-lc,-lc+h
+!6 (ближняя по слева)
+k,1114,-lc+h,-lc,-lc+h+a  
+
+! снизу-справа
+
+!1 (дальняя по центру)
+k,1115,lc-h,-lc+h,lc-h  
+!2 (дальняя справа)
+k,1116,lc-h,-lc+h,lc-h-a   
+!5 (дальняя по слева)
+k,1117,lc-h-a,-lc+h,lc-h  
+!3 (ближнаяя по центру)
+k,1118,lc-h,-lc,lc-h  
+!4 (ближняя справа)
+k,1119,lc-h,-lc,lc-h-a
+!6 (ближняя по слева)
+k,1120,lc-h-a,-lc,lc-h
+ 
+
+v,1109,1110,1111,1112,1113,1114 
+v,1115,1116,1117,1118,1119,1120 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+!*IF,GLOBAL_INDEX,EQ,1,THEN
+!    /output,f_r,txt,,
+!    *VWRITE
+!    ('Input data: Material __ unit cell')
+!    *VWRITE
+!    ('       H       L')
+!    /output
+!    *VWRITE
+!    (1X)
+!    /output
+!*ENDIF
+
+!/output,f_r,txt,,append
+!*VWRITE, h, l
+!(F8.4, F8.4)
+!/output
+
+
+FINISH
+
+/CLEAR
+*ENDDO
+
+!*VWRITE
+!('********** DONE **********')
+
+
+
+
+
+
+! 19.02.24
+! Команда для копирования объемов 
+!/prep7 
+!vsel, all
+!VGEN,2,ALL,,,2(коорд по x),0(коорд по y),0(коорд по z),,0,0
+
+
+! решение 
+! VSEL,S,VOLU,,
+
+
+
+
+/prep7 
+!vsel, all ! выбрать объемы
+!VGEN,3,ALL,,,1-h ! копировать объемы (модифицировать)
+!VGEN,3,ALL,,,,,1-h ! копировать объемы (модифицировать)
+!vsel,all
+!vinp,all ! находит пересечение объемов
+
+!cm, cell1, volumes
+!vgen, 2, cell1,,,1-h
+ 
+
+! 04.03.24
+! Команда Intersect в GUI
+! Команда Delete в GUI
+! Сначала вычтем 101 из 5   (при след фигуре, если сдвиг по X, то 201 из 105)
+! Затем   вычтем 111 из 15
+! Затем   вычтем 111 из 15
+
+
+! 18.03.24
+! Нельзя ли сделать целиком объем (мб группа объемов), чтобы проще было intersect один объем из другого
+
+! 21.03.24

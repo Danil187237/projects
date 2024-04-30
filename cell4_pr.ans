@@ -1,0 +1,606 @@
+
+*DO,GLOBAL_INDEX,1,5
+global_index = 1 
+
+!массив значений толщины балок 
+*DIM,h_list,ARRAY,5
+h_list(1) = 0.23
+h_list(2) = 0.1
+h_list(3) = 0.15
+h_list(4) = 0.2
+h_list(5) = 0.25
+h_list(6) = 0.3
+h_list(7) = 0.32
+! max_h = 0.29
+/prep7 
+!f_r = 'cube_result'    ! Название файла, куда записываютс¤ результаты 
+ 
+lf = 1 
+lc = lf/2 
+
+h = h_list(global_index) 
+hh = h/2 
+ 
+l = (1-3*h)/2 
+a = h/sqrt(2) 
+b = hh*sqrt(2)
+ 
+! передние ребра 
+ 
+! нижняя 
+block, -lc, -lc+h, -lc, -lc+h, lc-h, lc 
+block, -lc+h, -lc+h+a, -lc, -lc+h, lc-h, lc    
+block, -lc+h+a, -hh, -lc, -lc+h, lc-h, lc    
+block, -hh, hh, -lc, -lc+h, lc-h, lc 
+block, hh, lc-h-a, -lc, -lc+h, lc-h, lc      
+block, lc-h-a, lc-h, -lc, -lc+h, lc-h, lc    
+block, lc-h, lc, -lc, -lc+h, lc-h, lc  
+ 
+! правая 
+block, lc-h, lc, -lc+h, -lc+h+a, lc-h, lc
+block, lc-h, lc, -lc+h+a, -hh, lc-h, lc 
+block, lc-h, lc, -hh, hh, lc-h, lc  
+block, lc-h, lc, hh, lc-h-a, lc-h, lc  
+block, lc-h, lc, lc-h-a, lc-h, lc-h, lc  
+block, lc-h, lc, lc-h, lc, lc-h, lc 				
+ 
+! верхняя 
+block, -lc, -lc+h, lc, lc-h, lc-h, lc
+block, -lc+h, -lc+h+a, lc, lc-h, lc-h, lc 
+block, -lc+h+a, -hh, lc, lc-h, lc-h, lc 
+block, -hh, hh, lc, lc-h, lc-h, lc
+block, hh, lc-h-a, lc, lc-h, lc-h, lc  
+block, lc-h-a, lc-h, lc, lc-h, lc-h, lc  
+ 
+! левая 
+block, -lc, -lc+h, -lc+h, -lc+h+a, lc-h, lc  
+block, -lc, -lc+h, -lc+h+a, -hh, lc-h, lc  
+block, -lc, -lc+h, -hh, hh, lc-h, lc  
+block, -lc, -lc+h, hh, lc-h-a, lc-h, lc  
+block, -lc, -lc+h, lc-h-a, lc-h, lc-h, lc  
+ 
+
+! задние ребра 
+ 
+! нижняя   
+block, -lc, -lc+h, -lc, -lc+h, -lc+h, -lc 
+block, -lc+h, -lc+h+a, -lc, -lc+h, -lc+h, -lc    
+block, -lc+h+a, -hh, -lc, -lc+h, -lc+h, -lc    
+block, -hh, hh, -lc, -lc+h, -lc+h, -lc 
+block, hh, lc-h-a, -lc, -lc+h, -lc+h, -lc      
+block, lc-h-a, lc-h, -lc, -lc+h, -lc+h, -lc    
+block, lc-h, lc, -lc, -lc+h, -lc+h, -lc  
+  
+!правая 
+block, lc-h, lc, -lc+h, -lc+h+a, -lc+h, -lc
+block, lc-h, lc, -lc+h+a, -hh, -lc+h, -lc 
+block, lc-h, lc, -hh, hh, -lc+h, -lc  
+block, lc-h, lc, hh, lc-h-a, -lc+h, -lc  
+block, lc-h, lc, lc-h-a, lc-h, -lc+h, -lc  
+block, lc-h, lc, lc-h, lc, -lc+h, -lc 	
+ 
+!верхняя  
+block, -lc, -lc+h, lc, lc-h, -lc+h, -lc
+block, -lc+h, -lc+h+a, lc, lc-h, -lc+h, -lc 
+block, -lc+h+a, -hh, lc, lc-h, -lc+h, -lc 
+block, -hh, hh, lc, lc-h, -lc+h, -lc
+block, hh, lc-h-a, lc, lc-h, -lc+h, -lc  
+block, lc-h-a, lc-h, lc, lc-h, -lc+h, -lc  
+  
+!левая
+block, -lc, -lc+h, -lc+h, -lc+h+a, -lc+h, -lc  
+block, -lc, -lc+h, -lc+h+a, -hh, -lc+h, -lc  
+block, -lc, -lc+h, -hh, hh, -lc+h, -lc  
+block, -lc, -lc+h, hh, lc-h-a, -lc+h, -lc  
+block, -lc, -lc+h, lc-h-a, lc-h, -lc+h, -lc  
+
+ 
+! ребра справа 
+
+!нижнее 
+block, lc-h, lc, -lc+h, -lc, lc-h, lc-h-a 
+block, lc-h, lc, -lc+h, -lc, lc-h-a, hh   
+block, lc-h, lc, -lc+h, -lc, hh, -hh, 
+block, lc-h, lc, -lc+h, -lc, -hh, -lc+h+a 
+block, lc-h, lc, -lc+h, -lc, -lc+h+a, -lc+h 
+ 
+!верхнее 
+block, lc-h, lc, lc-h, lc, lc-h, lc-h-a 
+block, lc-h, lc, lc-h, lc, lc-h, hh   
+block, lc-h, lc, lc-h, lc, hh, -hh,  
+block, lc-h, lc, lc-h, lc, -hh, -lc+h+a 
+block, lc-h, lc, lc-h, lc, -hh, -lc+h 
+
+
+! ребра слева 
+ 
+!нижнее  
+block, -lc+h, -lc, -lc+h, -lc, lc-h, lc-h-a    
+block, -lc+h, -lc, -lc+h, -lc, lc-h-a, hh    
+block, -lc+h, -lc, -lc+h, -lc, hh, -hh,  
+block, -lc+h, -lc, -lc+h, -lc, -hh, -lc+h+a 
+block, -lc+h, -lc, -lc+h, -lc, -hh, -lc+h  
+  
+!верхнее  
+block, -lc+h, -lc, lc-h, lc, lc-h, lc-h-a 
+block, -lc+h, -lc, lc-h, lc, lc-h, hh    
+block, -lc+h, -lc, lc-h, lc, hh, -hh,   
+block, -lc+h, -lc, lc-h, lc, -hh, -lc+h+a 
+block, -lc+h, -lc, lc-h, lc, -hh, -lc+h
+
+
+! Диагональные блоки
+! Передняя грань 
+
+k,1001,-lc+h,-lc+h+a,lc 
+k,1002,-lc+h+a,-lc+h,lc  
+k,1003,-lc+h+a,-lc+h,lc-h 
+k,1004,-lc+h,-lc+h+a,lc-h
+k,1005,-b,0,lc
+k,1006,0,-b,lc 
+k,1007,0,-b,lc-h  
+k,1008,-b,0,lc-h 
+
+k,1009,0,b,lc
+k,1010,b,0,lc 
+k,1011,b,0,lc-h 
+k,1012,0,b,lc-h
+k,1013,lc-h-a,lc-h,lc 
+k,1014,lc-h,lc-h-a,lc 
+k,1015,lc-h,lc-h-a,lc-h 
+k,1016,lc-h-a,lc-h,lc-h 
+
+v,1001,1002,1003,1004,1005,1006,1007,1008 
+v,1005,1006,1007,1008,1009,1010,1011,1012
+v,1009,1010,1011,1012,1013,1014,1015,1016 
+ 
+! Задняя грань 
+
+k,1017,-lc+h,-lc+h+a,-lc 
+k,1018,-lc+h+a,-lc+h,-lc  
+k,1019,-lc+h+a,-lc+h,-lc+h 
+k,1020,-lc+h,-lc+h+a,-lc+h
+k,1021,-b,0,-lc
+k,1022,0,-b,-lc 
+k,1023,0,-b,-lc+h  
+k,1024,-b,0,-lc+h 
+
+k,1025,0,b,-lc
+k,1026,b,0,-lc 
+k,1027,b,0,-lc+h 
+k,1028,0,b,-lc+h
+k,1029,lc-h-a,lc-h,-lc 
+k,1030,lc-h,lc-h-a,-lc 
+k,1031,lc-h,lc-h-a,-lc+h 
+k,1032,lc-h-a,lc-h,-lc+h 
+
+v,1017,1018,1019,1020,1021,1022,1023,1024 
+v,1021,1022,1023,1024,1025,1026,1027,1028
+v,1025,1026,1027,1028,1029,1030,1031,1032
+
+! ТРЕУГОЛЬНИКИ
+
+k,1033,-lc+h,-lc+h,lc-h   
+k,1034,-lc+h,-lc+h,lc
+k,1035,lc-h,lc-h,lc-h   
+k,1036,lc-h,lc-h,lc   
+
+v,1004,1033,1003,1001,1034,1002
+v,1035,1015,1016,1036,1014,1013 
+
+k,1037,-lc+h,-lc+h,-lc+h   
+k,1038,-lc+h,-lc+h,-lc
+k,1039,lc-h,lc-h,-lc+h   
+k,1040,lc-h,lc-h,-lc   
+
+v,1020,1037,1019,1017,1038,1018
+v,1039,1031,1032,1040,1030,1029 
+
+
+
+! По диагонали 2
+! Передняя грань 
+
+k,1041,lc-h,-lc+h+a,lc 
+k,1042,lc-h-a,-lc+h,lc  
+k,1043,lc-h-a,-lc+h,lc-h 
+k,1044,lc-h,-lc+h+a,lc-h
+k,1045,b,0,lc
+k,1046,0,-b,lc 
+k,1047,0,-b,lc-h  
+k,1048,b,0,lc-h 
+
+k,1049,0,b,lc
+k,1050,-b,0,lc 
+k,1051,-b,0,lc-h 
+k,1052,0,b,lc-h
+k,1053,-lc+h+a,lc-h,lc 
+k,1054,-lc+h,lc-h-a,lc 
+k,1055,-lc+h,lc-h-a,lc-h 
+k,1056,-lc+h+a,lc-h,lc-h 
+
+v,1041,1042,1043,1044,1045,1046,1047,1048 
+v,1049,1050,1051,1052,1053,1054,1055,1056 
+
+! Задняя грань 
+
+k,1057,lc-h,-lc+h+a,-lc 
+k,1058,lc-h-a,-lc+h,-lc  
+k,1059,lc-h-a,-lc+h,-lc+h 
+k,1060,lc-h,-lc+h+a,-lc+h
+k,1061,b,0,-lc
+k,1062,0,-b,-lc 
+k,1063,0,-b,-lc+h  
+k,1064,b,0,-lc+h 
+
+k,1065,0,b,-lc
+k,1066,-b,0,-lc 
+k,1067,-b,0,-lc+h 
+k,1068,0,b,-lc+h
+k,1069,-lc+h+a,lc-h,-lc 
+k,1070,-lc+h,lc-h-a,-lc 
+k,1071,-lc+h,lc-h-a,-lc+h 
+k,1072,-lc+h+a,lc-h,-lc+h 
+
+v,1057,1058,1059,1060,1061,1062,1063,1064 
+v,1065,1066,1067,1068,1069,1070,1071,1072 
+
+! ТРЕУГОЛЬНИКИ
+
+k,1073,lc-h,-lc+h,lc-h   
+k,1074,lc-h,-lc+h,lc
+k,1075,-lc+h,lc-h,lc-h   
+k,1076,-lc+h,lc-h,lc   
+
+v,1044,1073,1043,1041,1074,1042
+v,1075,1055,1056,1076,1054,1053 
+
+k,1077,lc-h,-lc+h,-lc+h   
+k,1078,lc-h,-lc+h,-lc
+k,1079,-lc+h,lc-h,-lc+h   
+k,1080,-lc+h,lc-h,-lc   
+
+v,1060,1077,1059,1057,1078,1058
+v,1079,1071,1072,1080,1070,1069
+
+! Грани справа-слева
+! Диагональные блоки
+! Передняя грань 
+
+k,1081,lc,-lc+h+a,-lc+h 
+k,1082,lc,-lc+h,-lc+h+a  
+k,1083,lc-h,-lc+h,-lc+h+a 
+k,1084,lc-h,-lc+h+a,-lc+h
+k,1085,lc,0,-b
+k,1086,lc,-b,0 
+k,1087,lc-h,-b,0  
+k,1088,lc-h,0,-b 
+
+k,1089,lc,b,0
+k,1090,lc,0,b 
+k,1091,lc-h,0,b 
+k,1092,lc-h,b,0
+k,1093,lc,lc-h,lc-h-a 
+k,1094,lc,lc-h-a,lc-h 
+k,1095,lc-h,lc-h-a,lc-h 
+k,1096,lc-h,lc-h,lc-h-a 
+
+v,1081,1082,1083,1084,1085,1086,1087,1088 
+v,1085,1086,1087,1088,1089,1090,1091,1092
+v,1089,1090,1091,1092,1093,1094,1095,1096 
+ 
+! Задняя грань 
+
+k,1097,-lc,-lc+h+a,-lc+h 
+k,1098,-lc,-lc+h,-lc+h+a  
+k,1099,-lc+h,-lc+h,-lc+h+a 
+k,1100,-lc+h,-lc+h+a,-lc+h
+k,1101,-lc,0,-b
+k,1102,-lc,-b,0 
+k,1103,-lc+h,-b,0  
+k,1104,-lc+h,0,-b 
+
+k,1105,-lc,b,0
+k,1106,-lc,0,b 
+k,1107,-lc+h,0,b 
+k,1108,-lc+h,b,0
+k,1109,-lc,lc-h,lc-h-a 
+k,1110,-lc,lc-h-a,lc-h 
+k,1111,-lc+h,lc-h-a,lc-h 
+k,1112,-lc+h,lc-h,lc-h-a 
+
+v,1097,1098,1099,1100,1101,1102,1103,1104 
+v,1101,1102,1103,1104,1105,1106,1107,1108
+v,1105,1106,1107,1108,1109,1110,1111,1112
+
+! ТРЕУГОЛЬНИКИ
+
+k,1113,lc-h,-lc+h,-lc+h   
+k,1114,lc,-lc+h,-lc+h
+k,1115,lc-h,lc-h,lc-h   
+k,1116,lc,lc-h,lc-h   
+
+v,1084,1113,1083,1081,1114,1082
+v,1115,1095,1096,1116,1094,1093 
+
+k,1117,-lc+h,-lc+h,-lc+h   
+k,1118,-lc,-lc+h,-lc+h
+k,1119,-lc+h,lc-h,lc-h   
+k,1120,-lc,lc-h,lc-h   
+
+v,1100,1117,1099,1097,1118,1098
+v,1119,1111,1112,1120,1110,1109 
+
+
+
+! По диагонали 2
+! Передняя грань 
+
+k,1121,lc,-lc+h+a,lc-h 
+k,1122,lc,-lc+h,lc-h-a  
+k,1123,lc-h,-lc+h,lc-h-a 
+k,1124,lc-h,-lc+h+a,lc-h
+k,1125,lc,0,b
+k,1126,lc,-b,0 
+k,1127,lc-h,-b,0  
+k,1128,lc-h,0,b 
+
+k,1129,lc,b,0
+k,1130,lc,0,-b 
+k,1131,lc-h,0,-b 
+k,1132,lc-h,b,0
+k,1133,lc,lc-h,-lc+h+a 
+k,1134,lc,lc-h-a,-lc+h 
+k,1135,lc-h,lc-h-a,-lc+h 
+k,1136,lc-h,lc-h,-lc+h+a 
+
+v,1121,1122,1123,1124,1125,1126,1127,1128 
+v,1129,1130,1131,1132,1133,1134,1135,1136 
+
+! Задняя грань 
+
+k,1137,-lc,-lc+h+a,lc-h 
+k,1138,-lc,-lc+h,lc-h-a  
+k,1139,-lc+h,-lc+h,lc-h-a 
+k,1140,-lc+h,-lc+h+a,lc-h
+k,1141,-lc,0,b
+k,1142,-lc,-b,0 
+k,1143,-lc+h,-b,0  
+k,1144,-lc+h,0,b 
+
+k,1145,-lc,b,0
+k,1146,-lc,0,-b 
+k,1147,-lc+h,0,-b 
+k,1148,-lc+h,b,0
+k,1149,-lc,lc-h,-lc+h+a 
+k,1150,-lc,lc-h-a,-lc+h 
+k,1151,-lc+h,lc-h-a,-lc+h 
+k,1152,-lc+h,lc-h,-lc+h+a 
+
+v,1137,1138,1139,1140,1141,1142,1143,1144 
+v,1145,1146,1147,1148,1149,1150,1151,1152 
+
+! ТРЕУГОЛЬНИКИ
+
+k,1153,lc-h,-lc+h,lc-h   
+k,1154,lc,-lc+h,lc-h
+k,1155,lc-h,lc-h,-lc+h   
+k,1156,lc,lc-h,-lc+h   
+
+v,1124,1153,1123,1121,1154,1122
+v,1155,1135,1136,1156,1134,1133 
+
+k,1157,-lc+h,-lc+h,lc-h   
+k,1158,-lc,-lc+h,lc-h
+k,1159,-lc+h,lc-h,-lc+h   
+k,1160,-lc,lc-h,-lc+h   
+
+v,1140,1157,1139,1137,1158,1138
+v,1159,1151,1152,1160,1150,1149
+
+! Диагональные блоки
+! Передняя грань 
+
+k,1161,-lc+h,lc,-lc+h+a 
+k,1162,-lc+h+a,lc,-lc+h  
+k,1163,-lc+h+a,lc-h,-lc+h 
+k,1164,-lc+h,lc-h,-lc+h+a
+k,1165,-b,lc,0
+k,1166,0,lc,-b 
+k,1167,0,lc-h,-b  
+k,1168,-b,lc-h,0 
+
+k,1169,0,lc,b
+k,1170,b,lc,0 
+k,1171,b,lc-h,0 
+k,1172,0,lc-h,b
+k,1173,lc-h-a,lc,lc-h 
+k,1174,lc-h,lc,lc-h-a 
+k,1175,lc-h,lc-h,lc-h-a 
+k,1176,lc-h-a,lc-h,lc-h 
+
+v,1161,1162,1163,1164,1165,1166,1167,1168 
+v,1165,1166,1167,1168,1169,1170,1171,1172
+v,1169,1170,1171,1172,1173,1174,1175,1176 
+ 
+! Задняя грань 
+
+k,1177,-lc+h,-lc,-lc+h+a 
+k,1178,-lc+h+a,-lc,-lc+h  
+k,1179,-lc+h+a,-lc+h,-lc+h 
+k,1180,-lc+h,-lc+h,-lc+h+a
+k,1181,-b,-lc,0
+k,1182,0,-lc,-b 
+k,1183,0,-lc+h,-b  
+k,1184,-b,-lc+h,0 
+
+k,1185,0,-lc,b
+k,1186,b,-lc,0 
+k,1187,b,-lc+h,0 
+k,1188,0,-lc+h,b
+k,1189,lc-h-a,-lc,lc-h 
+k,1190,lc-h,-lc,lc-h-a 
+k,1191,lc-h,-lc+h,lc-h-a 
+k,1192,lc-h-a,-lc+h,lc-h 
+
+v,1177,1178,1179,1180,1181,1182,1183,1184 
+v,1181,1182,1183,1184,1185,1186,1187,1188
+v,1185,1186,1187,1188,1189,1190,1191,1192
+
+! ТРЕУГОЛЬНИКИ
+
+k,1193,-lc+h,lc-h,-lc+h   
+k,1194,-lc+h,lc,-lc+h
+k,1195,lc-h,lc-h,lc-h   
+k,1196,lc-h,lc,lc-h   
+
+v,1164,1193,1163,1161,1194,1162
+v,1195,1175,1176,1196,1174,1173 
+
+k,1197,-lc+h,-lc+h,-lc+h   
+k,1198,-lc+h,-lc,-lc+h
+k,1199,lc-h,-lc+h,lc-h   
+k,1200,lc-h,-lc,lc-h   
+
+v,1180,1197,1179,1177,1198,1178
+v,1199,1191,1192,1200,1190,1189 
+
+
+
+! По диагонали 2
+! Передняя грань 
+
+k,1201,lc-h,lc,-lc+h+a 
+k,1202,lc-h-a,lc,-lc+h  
+k,1203,lc-h-a,lc-h,-lc+h 
+k,1204,lc-h,lc-h,-lc+h+a
+k,1205,b,lc,0
+k,1206,0,lc,-b 
+k,1207,0,lc-h,-b  
+k,1208,b,lc-h,0 
+
+k,1209,0,lc,b
+k,1210,-b,lc,0 
+k,1211,-b,lc-h,0 
+k,1212,0,lc-h,b
+k,1213,-lc+h+a,lc,lc-h 
+k,1214,-lc+h,lc,lc-h-a 
+k,1215,-lc+h,lc-h,lc-h-a 
+k,1216,-lc+h+a,lc-h,lc-h 
+
+v,1201,1202,1203,1204,1205,1206,1207,1208 
+v,1209,1210,1211,1212,1213,1214,1215,1216 
+
+! Задняя грань 
+
+k,1217,lc-h,-lc,-lc+h+a 
+k,1218,lc-h-a,-lc,-lc+h  
+k,1219,lc-h-a,-lc+h,-lc+h 
+k,1220,lc-h,-lc+h,-lc+h+a
+k,1221,b,-lc,0
+k,1222,0,-lc,-b 
+k,1223,0,-lc+h,-b  
+k,1224,b,-lc+h,0 
+
+k,1225,0,-lc,b
+k,1226,-b,-lc,0 
+k,1227,-b,-lc+h,0 
+k,1228,0,-lc+h,b
+k,1229,-lc+h+a,-lc,lc-h 
+k,1230,-lc+h,-lc,lc-h-a 
+k,1231,-lc+h,-lc+h,lc-h-a 
+k,1232,-lc+h+a,-lc+h,lc-h 
+
+v,1217,1218,1219,1220,1221,1222,1223,1224 
+v,1225,1226,1227,1228,1229,1230,1231,1232 
+
+! ТРЕУГОЛЬНИКИ
+
+k,1233,lc-h,lc-h,-lc+h   
+k,1234,lc-h,lc,-lc+h
+k,1235,-lc+h,lc-h,lc-h   
+k,1236,-lc+h,lc,lc-h   
+
+v,1204,1233,1203,1201,1234,1202
+v,1235,1215,1216,1236,1214,1213 
+
+k,1237,lc-h,-lc+h,-lc+h   
+k,1238,lc-h,-lc,-lc+h
+k,1239,-lc+h,-lc+h,lc-h   
+k,1240,-lc+h,-lc,lc-h   
+
+v,1220,1237,1219,1217,1238,1218
+v,1239,1231,1232,1240,1230,1229
+
+
+
+
+
+
+!*IF,GLOBAL_INDEX,EQ,1,THEN
+!    /output,f_r,txt,,
+!    *VWRITE
+!    ('Input data: Material __ unit cell')
+!    *VWRITE
+!    ('       H       L')
+!    /output
+!    *VWRITE
+!    (1X)
+!    /output
+!*ENDIF
+
+!/output,f_r,txt,,append
+!*VWRITE, h, l
+!(F8.4, F8.4)
+!/output
+
+
+FINISH
+
+/CLEAR
+*ENDDO
+
+!*VWRITE
+!('********** DONE **********')
+
+
+
+
+
+
+! 19.02.24
+! Команда для копирования объемов 
+!/prep7 
+!vsel, all
+!VGEN,2,ALL,,,2(коорд по x),0(коорд по y),0(коорд по z),,0,0
+
+
+! решение 
+! VSEL,S,VOLU,,
+
+
+
+
+/prep7 
+!vsel, all ! выбрать объемы
+!VGEN,3,ALL,,,1-h ! копировать объемы (модифицировать)
+!VGEN,3,ALL,,,,,1-h ! копировать объемы (модифицировать)
+!vsel,all
+!vinp,all ! находит пересечение объемов
+
+!cm, cell1, volumes
+!vgen, 2, cell1,,,1-h
+ 
+
+! 04.03.24
+! Команда Intersect в GUI
+! Команда Delete в GUI
+! Сначала вычтем 101 из 5   (при след фигуре, если сдвиг по X, то 201 из 105)
+! Затем   вычтем 111 из 15
+! Затем   вычтем 111 из 15
+
+
+! 18.03.24
+! Нельзя ли сделать целиком объем (мб группа объемов), чтобы проще было intersect один объем из другого
+
+! 21.03.24
